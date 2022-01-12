@@ -1,0 +1,15 @@
+com\mycompany\hibernate\model\Proyecto.class
+com\mycompany\hibernate\session\SesionFactory.class
+com\mycompany\hibernate\resources\Controller.class
+com\mycompany\hibernate\resources\Vista.class
+com\mycompany\hibernate\dao\DaoInterface.class
+com\mycompany\hibernate\session\Service.class
+com\mycompany\hibernate\model\Dept.class
+com\mycompany\hibernate\dao\DeptDAO.class
+com\mycompany\hibernate\model\Empleado.class
+com\mycompany\hibernate\dao\DaoFactory.class
+com\mycompany\hibernate\model\Familiar.class
+com\mycompany\hibernate\resources\HibernateUtil.class
+com\mycompany\hibernate\dao\FamDAO.class
+com\mycompany\hibernate\dao\EmpDAO.class
+com\mycompany\hibernate\dao\ProyDAO.class
