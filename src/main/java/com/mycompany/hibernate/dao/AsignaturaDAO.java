@@ -7,6 +7,7 @@ package com.mycompany.hibernate.dao;
 import com.mycompany.hibernate.model.Asignaturas;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class AsignaturaDAO implements DaoInterface<Asignaturas> {
 
@@ -19,10 +20,20 @@ public class AsignaturaDAO implements DaoInterface<Asignaturas> {
         session.update(entity);
     }
 
-    public Asignaturas findById(String asname, Session session) {
-        return (Asignaturas) session.get(Asignaturas.class, asname);
-    }
+    public List<Asignaturas> findById(String asname, Session session) {
+        Query q = session.createQuery("FROM Asignaturas WHERE asname = :asname")
+        .setParameter("asname", asname);       
+        List<Asignaturas> listaAsi = q.getResultList();
 
+        return listaAsi;
+    }
+    
+    public List<Object[]> findByIdPro(String pname, Session session) {
+        Query query = session.createNativeQuery("Select Asignaturas.codA, Asignaturas.asname from Asignaturas INNER JOIN tienen ON asignaturas.codA = tienen.codA INNER JOIN Profesores ON tienen.idP = Profesores.idP where profesores.pname = ?")
+        .setParameter(1, pname);  
+        List<Object[]> asignaturas = query.getResultList(); 
+        return asignaturas;
+    }
     public void delete(Asignaturas entity, Session session) {
         session.delete(entity);
     }

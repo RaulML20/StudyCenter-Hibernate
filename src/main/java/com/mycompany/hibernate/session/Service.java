@@ -73,33 +73,44 @@ public class Service {
     /*
         Find by ID
     */
-    public Departamentos findById(int id) {
+    
+    //CONSULTA HQL
+    public List<Departamentos> findById(String dname) {
         sesionFactory.openCurrentSession();
-        Departamentos dept = deptDao.findById(id, sesionFactory.getCurrentSession());
+        List<Departamentos> dept = deptDao.findById(dname, sesionFactory.getCurrentSession());
         sesionFactory.closeCurrentSession();
         return dept;
     }
     
-    public Asignaturas findByIdAsi(String asname) {
+    //CONSULTA HQL
+    public List<Asignaturas> findByIdAsi(String asname) {
         sesionFactory.openCurrentSession();
-        Asignaturas asi = asiDao.findById(asname, sesionFactory.getCurrentSession());
+        List<Asignaturas> asi = asiDao.findById(asname, sesionFactory.getCurrentSession());
         sesionFactory.closeCurrentSession();
         return asi;
     }
-
     
-    //DELETE
-    public void delete(int codD) {
-            sesionFactory.openCurrentSessionwithTransaction();
-            Departamentos dept = deptDao.findById(codD, sesionFactory.getCurrentSession());
-            deptDao.delete(dept, sesionFactory.getCurrentSession());
-            sesionFactory.closeCurrentSessionwithTransaction();
+    //SQL NATIVO
+    public List<Object[]> findByIdPro(String pname) {
+        sesionFactory.openCurrentSession();
+        List<Object[]> asi = asiDao.findByIdPro(pname, sesionFactory.getCurrentSession());
+        sesionFactory.closeCurrentSession();
+        return asi;
     }
     
+    //DELETE
+    
     //Borrar un departamento
+    //CONSULTA HQL
     public void deleteDept(Departamentos entity) {
             sesionFactory.openCurrentSessionwithTransaction();
             deptDao.delete(entity, sesionFactory.getCurrentSession());
+            sesionFactory.closeCurrentSessionwithTransaction();
+    }
+    
+    public void deleteDept(String dname) {
+            sesionFactory.openCurrentSessionwithTransaction();
+            deptDao.delete(dname, sesionFactory.getCurrentSession());
             sesionFactory.closeCurrentSessionwithTransaction();
     }
 

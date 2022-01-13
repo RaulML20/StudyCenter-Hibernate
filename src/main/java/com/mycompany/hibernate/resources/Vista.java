@@ -18,9 +18,14 @@ public class Vista {
         System.out.println("1) Introducir un departamento");
         System.out.println("2) Introducir un alumno");
         System.out.println("3) Introducir un profesor");
-        System.out.println("4) Mostrar asignatura por el nombre");
-        System.out.println("5) Mostrar todos los alumnos");
-        System.out.println("6) Eliminar departamento por el nombre");
+        System.out.println("4) Mostrar todos los alumnos");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("CONSULTAS HQL");
+        
+        System.out.println("5) Eliminar departamento por el nombre");
+        System.out.println("6) Mostrar asignatura por el nombre");
+        System.out.println("7) Mostrar asignaturas que imparte un profesor");
         opcion = teclado.nextInt();
         return opcion;
     }

@@ -4,9 +4,11 @@
  */
 package com.mycompany.hibernate.dao;
 
+import com.mycompany.hibernate.model.Asignaturas;
 import com.mycompany.hibernate.model.Departamentos;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class DepartamentoDAO implements DaoInterface<Departamentos> {
 
@@ -18,11 +20,23 @@ public class DepartamentoDAO implements DaoInterface<Departamentos> {
         session.update(entity);
     }
 
-    public Departamentos findById(int codD, Session session) {
-        return (Departamentos) session.get(Departamentos.class, codD);
+    public List<Departamentos> findById(String dname, Session session) {
+        Query q = session.createQuery("FROM Departamentos WHERE dname = :dname")
+        .setParameter("dname", dname);       
+        List<Departamentos> listaDep = q.getResultList();
+
+        return listaDep;
     }
 
-    public void delete(Departamentos entity, Session session) {
+    public void delete(String dname, Session session) {
+        Query q = session.createQuery("DELETE Departamentos WHERE dname=:dname")
+        .setParameter("dname", dname); 
+        int numObj = q.executeUpdate();
+        System.out.println(numObj + " objetos borrados.");
+        //session.delete(dname);
+    }
+    
+    public void delete(Departamentos entity , Session session) {
         session.delete(entity);
     }
 
@@ -36,5 +50,10 @@ public class DepartamentoDAO implements DaoInterface<Departamentos> {
         for (Departamentos dept : lista) {
             delete(dept, sesion);
         }
+    }
+
+    @Override
+    public Departamentos findById(int id, Session session) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
